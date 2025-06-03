@@ -22,6 +22,12 @@ static int	handle_format(char specifier, va_list args)
 		return (ft_print_digit(va_arg(args, int)));
 	else if (specifier == '%')
 		return (ft_print_percent());
+	else if (specifier == 'u')
+		return (ft_print_unsigned(va_arg(args, unsigned int)));
+	else if (specifier == 'x' || specifier == 'X')
+		return (ft_print_hex(va_arg(args, unsigned int), specifier));
+	else if (specifier == 'p')
+		return (ft_print_pointer(va_arg(args, void *)));
 	else
 	{
 		ft_putchar_fd('%', 1);

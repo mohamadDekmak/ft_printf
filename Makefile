@@ -5,7 +5,10 @@ SRCS = ft_printf.c \
        ft_print_char.c \
        ft_print_str.c \
        ft_print_digit.c \
-       ft_print_percent.c
+       ft_print_percent.c \
+	   ft_print_hex.c \
+	   ft_print_pointer.c \
+	   ft_print_unsigned.c \
 
 TEST_SRC = main.c
 

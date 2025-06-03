@@ -45,7 +45,19 @@ int main() {
 	// Test 7: Edge cases
 	ft_printf("No specifiers in this string.\n");
 	ft_printf("Multiple adjacent specifiers: %d%s%c%%\n", 123, "test", 'X');
-	ft_printf("Format specifier at end: %d", 42);
+	ft_printf("Format specifier at end: %d\n", 42);
 	
+	// Test 8: Pointer printing
+	int x = 42;
+	ft_printf("Pointer test: %p\n", (void *)&x);
+	ft_printf("NULL pointer test: %p\n", NULL);
+	// Test 9: Hexadecimal printing
+	ft_printf("Hexadecimal test: %x %X\n", 255, 255);
+	ft_printf("Zero in hex: %x\n", 0);
+	// Test 10: Unsigned integers
+	ft_printf("Unsigned integer test: %u\n", 4294967295U);
+	ft_printf("Negative number as unsigned: %u\n", -1);
+
+
 	return 0;
 }

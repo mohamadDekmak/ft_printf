@@ -26,5 +26,9 @@ int	ft_print_digit(int n);
 
 int	ft_print_percent(void);
 
+int	ft_print_unsigned(unsigned int n);
+int	ft_print_hex(unsigned int n, char specifier);
+int	ft_print_pointer(void *ptr);
+
 #endif
 
