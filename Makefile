@@ -1,57 +1,25 @@
+SRCS = ft_printf.c ft_print_char.c ft_print_str.c ft_print_digit.c ft_print_percent.c ft_print_unsigned.c ft_print_hex.c ft_print_pointer.c
+OBJS = ${SRCS:.c=.o}
+INCS = includes
 NAME = libftprintf.a
-TEST_PROG = test_program
-
-SRCS = ft_printf.c \
-       ft_print_char.c \
-       ft_print_str.c \
-       ft_print_digit.c \
-       ft_print_percent.c \
-	   ft_print_hex.c \
-	   ft_print_pointer.c \
-	   ft_print_unsigned.c \
-
-TEST_SRC = main.c
-
-LIBFT_DIR = ./libft
-LIBFT = $(LIBFT_DIR)/libft
-
-HEADERS = ft_printf.h
-
-
-OBJS = $(SRCS:.c=.o)
-
-TEST_OBJ = $(TEST_SRC:.c=.o)
-
+LIBC = ar rc
+LIBR = ranlib
 CC = cc
-
+RM = rm -f
 CFLAGS = -Wall -Wextra -Werror
+.c.o:
+	  ${CC} ${CFLAGS} -c $< -o ${<:.c=.o} -I ${INCS}
 
-all: $(LIBFT) $(NAME) $(TEST_PROG)
+${NAME}: ${OBJS}
+		${LIBC} ${NAME} ${OBJS}
+		${LIBR} ${NAME}
 
-$(LIBFT):
-	$(MAKE) -C $(LIBFT_DIR)
-
-$(NAME): $(OBJS)
-	ar rcs $@ $(OBJS)
-
-$(TEST_PROG): $(NAME) $(TEST_OBJ)
-	$(CC) $(CFLAGS) -o $@ $(TEST_OBJ) -L. -l:$(NAME) -L$(LIBFT_DIR) -l:$(LIBFT)
-
-%.o: %.c $(HEADERS)
-	$(CC) $(CFLAGS) -c $< -o $@
+all: ${NAME}
 
 clean:
-	rm -f $(OBJS) $(TEST_OBJ)
-	$(MAKE) -C $(LIBFT_DIR) clean
+	   ${RM} ${OBJS}
 
 fclean: clean
-	rm -f $(NAME)
-	rm -f $(TEST_PROG)
-	$(MAKE) -C $(LIBFT_DIR) fclean
+		${RM} ${NAME}
 
 re: fclean all
-
-run: $(TEST_PROG)
-	./$(TEST_PROG)
-
-.PHONY: all clean fclean re run

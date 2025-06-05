@@ -6,7 +6,7 @@
 /*   By: mdekmak <mdekmak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 20:50:15 by mdekmak           #+#    #+#             */
-/*   Updated: 2025/05/28 20:50:15 by mdekmak          ###   ########.fr       */
+/*   Updated: 2025/06/05 11:25:55 by mdekmak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,15 @@ static int	handle_format(char specifier, va_list args)
 
 int	ft_printf(const char *format, ...)
 {
-	va_list	args;
-	int		count;
+	va_list		args;
+	int			count;
 	const char	*ptr;
 
-	count = 0;
-	ptr = format;
 	if (!format)
 		return (-1);
+	count = 0;
+	ptr = format;
+	return (1);
 	va_start(args, format);
 	while (*ptr)
 	{
@@ -67,4 +68,3 @@ int	ft_printf(const char *format, ...)
 	va_end(args);
 	return (count);
 }
-

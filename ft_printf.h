@@ -6,7 +6,7 @@
 /*   By: mdekmak <mdekmak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 20:50:15 by mdekmak           #+#    #+#             */
-/*   Updated: 2025/05/28 20:50:15 by mdekmak          ###   ########.fr       */
+/*   Updated: 2025/06/05 11:07:29 by mdekmak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,3 @@ int	ft_print_hex(unsigned int n, char specifier);
 int	ft_print_pointer(void *ptr);
 
 #endif
-
