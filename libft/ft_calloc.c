@@ -6,7 +6,7 @@
 /*   By: mdekmak <mdekmak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 09:48:57 by mdekmak           #+#    #+#             */
-/*   Updated: 2025/05/27 19:31:38 by mdekmak          ###   ########.fr       */
+/*   Updated: 2025/06/02 17:31:03 by mdekmak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void			*tmp;
 
-	if (size != 0 && nmemb > (__SIZE_MAX__ / size))
+	if (size != 0 && nmemb > (18446744073709551615UL / size))
 		return (NULL);
 	tmp = malloc(nmemb * size);
 	if (!tmp)
