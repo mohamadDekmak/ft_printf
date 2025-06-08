@@ -1,25 +1,47 @@
-SRCS = ft_printf.c ft_print_char.c ft_print_str.c ft_print_digit.c ft_print_percent.c ft_print_unsigned.c ft_print_hex.c ft_print_pointer.c
-OBJS = ${SRCS:.c=.o}
-INCS = includes
-NAME = libftprintf.a
-LIBC = ar rc
-LIBR = ranlib
-CC = cc
-RM = rm -f
-CFLAGS = -Wall -Wextra -Werror
-.c.o:
-	  ${CC} ${CFLAGS} -c $< -o ${<:.c=.o} -I ${INCS}
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mdekmak <mdekmak@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/06/07 15:30:55 by mdekmak           #+#    #+#              #
+#    Updated: 2025/06/07 15:30:55 by mdekmak          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-${NAME}: ${OBJS}
-		${LIBC} ${NAME} ${OBJS}
-		${LIBR} ${NAME}
+NAME=libftprintf.a
 
-all: ${NAME}
+LIBFTNAME=libft.a
+
+CC=cc
+
+FLAGS=-Wall -Wextra -Werror
+
+LIBFTDIR=./libft
+
+SRCS=ft_print_char.c ft_printf.c ft_print_str.c ft_print_digit.c \
+	ft_print_unsigned.c ft_print_pointer.c ft_print_hex.c
+
+OBJS=$(SRCS:.c=.o)
+
+all: $(NAME)
+
+makelib:
+	@make -C $(LIBFTDIR)
+	@cp $(LIBFTDIR)/$(LIBFTNAME) $(NAME)
+
+$(NAME): makelib $(OBJS)
+	@ar rcs $(NAME) $(OBJS)
 
 clean:
-	   ${RM} ${OBJS}
+	@rm -f $(OBJS)
+	@make clean -C $(LIBFTDIR)
 
 fclean: clean
-		${RM} ${NAME}
+	@rm -f $(NAME)
+	@make fclean -C $(LIBFTDIR)
 
 re: fclean all
+
+.PHONY: all makelib clean fclean re

@@ -5,66 +5,74 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdekmak <mdekmak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/28 20:50:15 by mdekmak           #+#    #+#             */
-/*   Updated: 2025/06/05 11:25:55 by mdekmak          ###   ########.fr       */
+/*   Created: 2025/06/07 15:30:03 by mdekmak           #+#    #+#             */
+/*   Updated: 2025/06/07 15:30:03 by mdekmak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	handle_format(char specifier, va_list args)
+int	handle_format(char p, va_list args)
 {
-	if (specifier == 'c')
+	if (!p)
+		return (0);
+	if (p == 'c')
 		return (ft_print_char(va_arg(args, int)));
-	else if (specifier == 's')
+	else if (p == '%')
+		return (ft_print_char('%'));
+	else if (p == 's')
 		return (ft_print_str(va_arg(args, char *)));
-	else if (specifier == 'd' || specifier == 'i')
+	else if (p == 'd' || p == 'i')
 		return (ft_print_digit(va_arg(args, int)));
-	else if (specifier == '%')
-		return (ft_print_percent());
-	else if (specifier == 'u')
+	else if (p == 'u')
 		return (ft_print_unsigned(va_arg(args, unsigned int)));
-	else if (specifier == 'x' || specifier == 'X')
-		return (ft_print_hex(va_arg(args, unsigned int), specifier));
-	else if (specifier == 'p')
+	else if (p == 'x' || p == 'X')
+		return (ft_print_hex(va_arg(args, unsigned int), p));
+	else if (p == 'p')
 		return (ft_print_pointer(va_arg(args, void *)));
 	else
 	{
 		ft_putchar_fd('%', 1);
-		ft_putchar_fd(specifier, 1);
+		ft_putchar_fd(p, 1);
 		return (2);
 	}
+}
+
+static int	helper(const char *p, va_list args)
+{
+	int	count;
+
+	count = 0;
+	while (*p)
+	{
+		if (*p == '%')
+		{
+			p++;
+			if (!p)
+				break ;
+			count += handle_format(*p, args);
+		}
+		else
+		{
+			ft_putchar_fd(*p, 1);
+			count++;
+		}
+		p++;
+	}
+	return (count);
 }
 
 int	ft_printf(const char *format, ...)
 {
 	va_list		args;
 	int			count;
-	const char	*ptr;
+	const char	*p;
 
 	if (!format)
 		return (-1);
-	count = 0;
-	ptr = format;
-	return (1);
+	p = format;
 	va_start(args, format);
-	while (*ptr)
-	{
-		if (*ptr == '%')
-		{
-			ptr++;
-			if (*ptr)
-				count += handle_format(*ptr, args);
-			else
-				break ;
-		}
-		else
-		{
-			ft_putchar_fd(*ptr, 1);
-			count++;
-		}
-		ptr++;
-	}
+	count = helper(p, args);
 	va_end(args);
 	return (count);
 }

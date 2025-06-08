@@ -5,27 +5,27 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdekmak <mdekmak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/03 08:32:48 by mdekmak           #+#    #+#             */
-/*   Updated: 2025/06/05 11:08:34 by mdekmak          ###   ########.fr       */
+/*   Created: 2025/06/07 16:48:49 by mdekmak           #+#    #+#             */
+/*   Updated: 2025/06/07 16:48:49 by mdekmak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_print_hex(unsigned int n, char specifier)
+int	ft_print_hex(unsigned int n, char p)
 {
-	char	*hex_digits;
+	char	*digits;
 	int		count;
 
-	if (specifier == 'x')
-		hex_digits = "0123456789abcdef";
-	else if (specifier == 'X')
-		hex_digits = "0123456789ABCDEF";
+	if (p == 'x')
+		digits = "0123456789abcdef";
+	else if (p == 'X')
+		digits = "0123456789ABCDEF";
 	else
 		return (0);
 	count = 0;
 	if (n >= 16)
-		count += ft_print_hex(n / 16, specifier);
-	ft_putchar_fd(hex_digits[n % 16], 1);
+		count += ft_print_hex(n / 16, p);
+	ft_putchar_fd(digits[n % 16], 1);
 	return (count + 1);
 }

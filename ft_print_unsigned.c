@@ -1,39 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_unsigned.c                                :+:      :+:    :+:   */
+/*   ft_print_unsinged.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdekmak <mdekmak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/03 08:31:41 by mdekmak           #+#    #+#             */
-/*   Updated: 2025/06/05 11:09:31 by mdekmak          ###   ########.fr       */
+/*   Created: 2025/06/07 22:41:34 by mdekmak           #+#    #+#             */
+/*   Updated: 2025/06/07 22:41:34 by mdekmak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_print_unsigned(unsigned int n)
+int	ft_print_unsigned(unsigned int d)
 {
-	int		count;
-	char	buffer[11];
-	int		i;
+	char			str[11];
+	int				count;
+	int				i;
 
-	if (n == 0)
-	{
-		ft_putchar_fd('0', 1);
-		return (1);
-	}
+	if (d == 0)
+		return (ft_print_char('0'));
 	i = 0;
 	count = 0;
-	while (n > 0)
+	while (d > 0)
 	{
-		buffer[i++] = (n % 10) + '0';
-		n /= 10;
+		str[i] = (d % 10) + '0';
+		d /= 10;
+		i++;
 	}
-	while (--i >= 0)
+	i = i - 1;
+	while (i >= 0)
 	{
-		ft_putchar_fd(buffer[i], 1);
-		count++;
+		count += ft_print_char(str[i]);
+		i--;
 	}
 	return (count);
 }

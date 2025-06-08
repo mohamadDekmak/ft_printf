@@ -5,29 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdekmak <mdekmak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/28 20:50:15 by mdekmak           #+#    #+#             */
-/*   Updated: 2025/06/05 11:07:29 by mdekmak          ###   ########.fr       */
+/*   Created: 2025/06/07 15:37:49 by mdekmak           #+#    #+#             */
+/*   Updated: 2025/06/07 15:37:49 by mdekmak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-
-# include "libft/libft.h"
 # include <stdarg.h>
+# include "libft/libft.h"
 
 int	ft_printf(const char *format, ...);
-
 int	ft_print_char(char c);
-
 int	ft_print_str(char *s);
-
-int	ft_print_digit(int n);
-
-int	ft_print_percent(void);
-
-int	ft_print_unsigned(unsigned int n);
-int	ft_print_hex(unsigned int n, char specifier);
-int	ft_print_pointer(void *ptr);
+int	ft_print_digit(int d);
+int	ft_print_unsigned(unsigned int d);
+int	ft_print_pointer(void *p);
+int	ft_print_hex(unsigned int n, char p);
 
 #endif

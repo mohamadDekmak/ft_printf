@@ -5,41 +5,39 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdekmak <mdekmak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/03 08:33:49 by mdekmak           #+#    #+#             */
-/*   Updated: 2025/06/05 11:09:14 by mdekmak          ###   ########.fr       */
+/*   Created: 2025/06/07 16:49:04 by mdekmak           #+#    #+#             */
+/*   Updated: 2025/06/07 16:49:04 by mdekmak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_print_pointer_rec(unsigned long address)
+static int	ft_print_hex_help(unsigned long n)
 {
+	char	*digits;
 	int		count;
-	char	*hex_digits;
 
-	hex_digits = "0123456789abcdef";
+	digits = "0123456789abcdef";
 	count = 0;
-	if (address >= 16)
-		count += ft_print_pointer_rec(address / 16);
-	ft_putchar_fd(hex_digits[address % 16], 1);
+	if (n >= 16)
+		count += ft_print_hex_help(n / 16);
+	ft_putchar_fd(digits[n % 16], 1);
 	return (count + 1);
 }
 
-int	ft_print_pointer(void *ptr)
+int	ft_print_pointer(void *p)
 {
-	int				count;
-	unsigned long	address;
+	int				len;
+	unsigned long	add;
 
-	if (!ptr)
-		return (ft_print_str(NULL));
-	address = (unsigned long)ptr;
-	count = 0;
-	count += ft_print_str("0x");
-	if (address == 0)
+	if (!p)
 	{
-		ft_putchar_fd('0', 1);
-		return (count + 1);
+		ft_putstr_fd("(nil)", 1);
+		return (5);
 	}
-	count += ft_print_pointer_rec(address);
-	return (count);
+	ft_putstr_fd("0x", 1);
+	len = 2;
+	add = (unsigned long)p;
+	len += ft_print_hex_help(add);
+	return (len);
 }
